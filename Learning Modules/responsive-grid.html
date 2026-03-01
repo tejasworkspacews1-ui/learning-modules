@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Grid Layout</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+        }
+
+        .header-section {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid-container {
+            padding: 50px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .grid-icon.blue { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .grid-icon.green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; }
+        .grid-icon.orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+        .grid-icon.purple { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+        .grid-icon.yellow { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+        .grid-icon.red { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #333; }
+
+        .grid-item h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .grid-item p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .grid-badge {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .feature-section {
+            background: white;
+            padding: 60px 20px;
+            margin-top: 30px;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .feature-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #11998e;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h4 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .footer a {
+            color: #38ef7d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            color: #38ef7d;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .grid-item {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-section">
+        <h1><i class="fas fa-th-large"></i> Responsive Grid Layout</h1>
+        <p>Built with Bootstrap 5 Grid System</p>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="grid-container">
+        <div class="row g-4">
+            <!-- Row 1 - Large cards -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="grid-item">
+                    <div class="grid-icon blue">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <span class="grid-badge">Web Development</span>
+                    <h3>Responsive Design</h3>
+                    <p>Learn how to create websites that look great on any device using modern CSS techniques and frameworks.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="grid-item">
+                    <div class="grid-icon green">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <span class="grid-badge">JavaScript</span>
+                    <h3>Dynamic Interactions</h3>
+                    <p>Add interactivity to your websites with JavaScript. Create engaging user experiences with animations.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="grid-item">
+                    <div class="grid-icon orange">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <span class="grid-badge">Backend</span>
+                    <h3>Database Management</h3>
+                    <p>Understand how to store and manage data efficiently using modern database technologies.</p>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="grid-item">
+                    <div class="grid-icon purple">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <span class="grid-badge">Frontend</span>
+                    <h3>React JS</h3>
+                    <p>Build modern single-page applications with React.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="grid-item">
+                    <div class="grid-icon yellow">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <span class="grid-badge">Programming</span>
+                    <h3>Python</h3>
+                    <p>Learn Python for data science and automation.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="grid-item">
+                    <div class="grid-icon red">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <span class="grid-badge">Cloud</span>
+                    <h3>Cloud Computing</h3>
+                    <p>Deploy applications to the cloud with AWS.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="grid-item">
+                    <div class="grid-icon blue">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <span class="grid-badge">Mobile</span>
+                    <h3>Mobile Apps</h3>
+                    <p>Create cross-platform mobile applications.</p>
+                </div>
+            </div>
+
+            <!-- Row 3 - Full width -->
+            <div class="col-12">
+                <div class="grid-item" style="flex-direction: row; gap: 30px; text-align: left;">
+                    <div class="grid-icon green" style="flex-shrink: 0;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <span class="grid-badge">Education</span>
+                        <h3>My Learning Journey</h3>
+                        <p>As a B Tech Engineering student, I'm passionate about learning new technologies and building projects. This responsive grid layout demonstrates my understanding of Bootstrap's grid system and responsive design principles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="feature-section">
+        <div class="feature-grid">
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile First</h4>
+                        <p>Designed for mobile devices first</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h4>Fast Loading</h4>
+                        <p>Optimized for speed</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-universal-access"></i>
+                        </div>
+                        <h4>Accessible</h4>
+                        <p>Follows WCAG guidelines</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>SEO Ready</h4>
+                        <p>Search engine optimized</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Created by <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Tejas Kamble</a> | B Tech Engineering </p>
+        <p>Email: tejasksocials@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+        </div>
+        <p style="margin-top: 15px;">&copy; Tejas Kamble - All rights reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

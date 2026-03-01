@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Webpage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #667eea;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .highlight {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #667eea;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to My Portfolio</h1>
+        <img src="tejas.jpg" alt="Profile Picture" class="profile-img">
+        <p>
+            Hi, I'm <span class="highlight">Tejas Kamble</span>, a B Tech Engineering student 
+            passionate about web development and technology. This is my first webpage where I showcase 
+            my journey into the world of programming. I'm excited to learn new skills and build amazing 
+            projects that make a difference.
+        </p>
+        <p>
+            I'm currently pursuing my engineering degree and looking forward to gaining practical 
+            experience through internships and real-world projects. My goal is to become a 
+            full-stack developer and contribute to innovative solutions.
+        </p>
+        <footer>
+            <p>Email: tejasksocials@gmail.com</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/tejasworkspacews1-ui" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank"><i class="fas fa-globe"></i></a>
+            </div>
+            <p style="margin-top: 15px;">&copy; Tejas Kamble - All rights reserved</p>
+        </footer>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>

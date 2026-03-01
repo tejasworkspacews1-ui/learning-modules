@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Modules | Tejas Kamble</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(233, 69, 96, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(67, 97, 238, 0.2) 0%, transparent 50%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-section {
+            margin-top: 30px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #e94560;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #e94560;
+            margin: 15px auto 0;
+        }
+
+        /* Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .module-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: #e94560;
+        }
+
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .module-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .module-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .module-tag {
+            display: inline-block;
+            background: rgba(233, 69, 96, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 15px;
+        }
+
+        /* Level Sections */
+        .level-section {
+            margin-bottom: 50px;
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .level-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .level-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2), transparent);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #e94560;
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>Welcome to My Learning Modules</h1>
+            <p>A collection of web development projects showcasing my skills in HTML, CSS, JavaScript, and responsive design. <br> *Please note that these projects were created during my learning process. They are intended to demonstrate the skills I have developed and may not reflect fully polished or production-level work.*</p>
+            
+            <div class="profile-section">
+                <img src="tejas.jpg" alt="Tejas Kamble" class="profile-img">
+                <div class="name">Tejas Kamble</div>
+                <div class="title">Aspiring Full Stack Web Developer</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Level 1 Section -->
+        <div class="level-section">
+            <div class="level-header">
+                <span class="level-badge">Level 1</span>
+                <div class="level-line"></div>
+            </div>
+            
+            <h2 class="section-title">HTML, CSS & JavaScript Basics</h2>
+            
+            <div class="modules-grid">
+                <a href="simple-webpage.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3>Simple Webpage</h3>
+                    <p>A basic webpage showcasing HTML structure with heading, paragraph, and profile image.</p>
+                    <span class="module-tag">HTML & CSS</span>
+                </a>
+
+                <a href="basic-form.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-forms"></i>
+                    </div>
+                    <h3>Basic Form</h3>
+                    <p>Contact form with input fields and submit functionality with validation.</p>
+                    <span class="module-tag">HTML & CSS</span>
+                </a>
+
+                <a href="navigation-menu.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <h3>Navigation Menu</h3>
+                    <p>Responsive navigation menu with links and hover effects.</p>
+                    <span class="module-tag">HTML & CSS</span>
+                </a>
+
+                <a href="color-button.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Color Changing Button</h3>
+                    <p>Interactive button that changes to random colors on each click.</p>
+                    <span class="module-tag">JavaScript</span>
+                </a>
+
+                <a href="time-greeting.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Time-Based Greeting</h3>
+                    <p>Real-time clock with personalized greetings based on time of day.</p>
+                    <span class="module-tag">JavaScript</span>
+                </a>
+
+                <a href="basic-calculator.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Basic Calculator</h3>
+                    <p>Fully functional calculator with keyboard support and calculation history.</p>
+                    <span class="module-tag">JavaScript</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Level 2 Section -->
+        <div class="level-section">
+            <div class="level-header">
+                <span class="level-badge">Level 2</span>
+                <div class="level-line"></div>
+            </div>
+            
+            <h2 class="section-title">Frameworks & Responsive Design</h2>
+            
+            <div class="modules-grid">
+                <a href="responsive-card.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h3>Responsive Card</h3>
+                    <p>Responsive card component built with Bootstrap 5 featuring hover effects.</p>
+                    <span class="module-tag">Bootstrap</span>
+                </a>
+
+                <a href="responsive-grid.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3>Responsive Grid</h3>
+                    <p>Dynamic grid layout demonstrating Bootstrap's responsive grid system.</p>
+                    <span class="module-tag">Bootstrap</span>
+                </a>
+
+                <a href="media-queries.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-expand"></i>
+                    </div>
+                    <h3>Media Queries</h3>
+                    <p>Responsive webpage demonstrating CSS media queries for all screen sizes.</p>
+                    <span class="module-tag">CSS</span>
+                </a>
+
+                <a href="hamburger-menu.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h3>Hamburger Menu</h3>
+                    <p>Mobile-friendly navigation with animated hamburger menu toggle.</p>
+                    <span class="module-tag">CSS & JS</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Level 3 Section -->
+        <div class="level-section">
+            <div class="level-header">
+                <span class="level-badge">Level 3</span>
+                <div class="level-line"></div>
+            </div>
+            
+            <h2 class="section-title">Image Manipulation & Advanced</h2>
+            
+            <div class="modules-grid">
+                <a href="image-gallery.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Image Gallery</h3>
+                    <p>Interactive image gallery with hover effects and fullscreen modal view.</p>
+                    <span class="module-tag">JavaScript</span>
+                </a>
+
+                <a href="image-slideshow.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3>Image Slideshow</h3>
+                    <p>Automatic image slideshow with navigation controls and auto-play feature.</p>
+                    <span class="module-tag">JavaScript</span>
+                </a>
+
+                <a href="landing-page.html" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Virtual ID Card</h3>
+                    <p>Professional virtual identity card with floating animation and quick links.</p>
+                    <span class="module-tag">Advanced</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer" title="Website">
+                <i class="fas fa-globe"></i>
+            </a>
+            <a href="mailto:tejasksocials@gmail.com" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        
+        <p>Created by <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Tejas Kamble</a> | B Tech Engineering </p>
+        
+        <div class="copyright">
+            &copy; Tejas Kamble - All rights reserved
+        </div>
+    </footer>
+</body>
+</html>

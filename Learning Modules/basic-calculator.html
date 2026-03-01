@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .calculator h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .display {
+            background: #1a1a2e;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: right;
+        }
+
+        .display-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            text-align: right;
+            outline: none;
+            font-family: 'Courier New', monospace;
+        }
+
+        .display-input::placeholder {
+            color: #666;
+        }
+
+        .result {
+            color: #38ef7d;
+            font-size: 1rem;
+            min-height: 20px;
+            margin-top: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-number {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-number:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-operator {
+            background: #11998e;
+            color: white;
+        }
+
+        .btn-operator:hover {
+            background: #0d7a70;
+        }
+
+        .btn-equals {
+            background: #38ef7d;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .btn-equals:hover {
+            background: #2cc96b;
+        }
+
+        .btn-clear {
+            background: #ff6b6b;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .btn-clear:hover {
+            background: #ee5a5a;
+        }
+
+        .btn-decimal {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .creator {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .creator a {
+            color: #11998e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .history {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .history h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .history-item {
+            color: #666;
+            font-size: 0.85rem;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #11998e;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>🧮 Basic Calculator</h1>
+        
+        <div class="display">
+            <input type="text" class="display-input" id="display" placeholder="0" readonly>
+            <div class="result" id="result"></div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-clear" onclick="clearDisplay()">C</button>
+            <button class="btn btn-operator" onclick="deleteLast()">⌫</button>
+            <button class="btn btn-operator" onclick="appendOperator('/')">÷</button>
+            <button class="btn btn-operator" onclick="appendOperator('*')">×</button>
+            
+            <button class="btn btn-number" onclick="appendNumber('7')">7</button>
+            <button class="btn btn-number" onclick="appendNumber('8')">8</button>
+            <button class="btn btn-number" onclick="appendNumber('9')">9</button>
+            <button class="btn btn-operator" onclick="appendOperator('-')">−</button>
+            
+            <button class="btn btn-number" onclick="appendNumber('4')">4</button>
+            <button class="btn btn-number" onclick="appendNumber('5')">5</button>
+            <button class="btn btn-number" onclick="appendNumber('6')">6</button>
+            <button class="btn btn-operator" onclick="appendOperator('+')">+</button>
+            
+            <button class="btn btn-number" onclick="appendNumber('1')">1</button>
+            <button class="btn btn-number" onclick="appendNumber('2')">2</button>
+            <button class="btn btn-number" onclick="appendNumber('3')">3</button>
+            <button class="btn btn-equals" onclick="calculate()">=</button>
+            
+            <button class="btn btn-number" onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
+            <button class="btn btn-decimal" onclick="appendDecimal('.')">.</button>
+        </div>
+        
+        <div class="history" id="history">
+            <h4>Calculation History:</h4>
+            <div id="historyList">
+                <div class="history-item">No calculations yet</div>
+            </div>
+        </div>
+        
+        <p class="creator">
+            Created by <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Tejas Kamble</a> | B Tech
+        </p>
+        <p class="creator">Email: tejasksocials@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+        </div>
+        <p class="creator" style="margin-top: 10px;">&copy; Tejas Kamble - All rights reserved</p>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let result = document.getElementById('result');
+        let historyList = document.getElementById('historyList');
+        let calculationHistory = [];
+
+        function appendNumber(num) {
+            if (display.value === '0' || display.value === '') {
+                display.value = num;
+            } else {
+                display.value += num;
+            }
+        }
+
+        function appendOperator(operator) {
+            const lastChar = display.value.slice(-1);
+            if (['+', '-', '*', '/'].includes(lastChar)) {
+                display.value = display.value.slice(0, -1) + operator;
+            } else {
+                display.value += operator;
+            }
+        }
+
+        function appendDecimal(decimal) {
+            if (!display.value.includes(decimal)) {
+                display.value += decimal;
+            }
+        }
+
+        function clearDisplay() {
+            display.value = '';
+            result.textContent = '';
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+            if (display.value === '') {
+                display.value = '0';
+            }
+        }
+
+        function calculate() {
+            try {
+                const expression = display.value;
+                const evalResult = eval(expression);
+                
+                if (!isNaN(evalResult) && isFinite(evalResult)) {
+                    result.textContent = '= ' + evalResult;
+                    
+                    // Add to history
+                    const historyItem = expression + ' = ' + evalResult;
+                    calculationHistory.unshift(historyItem);
+                    
+                    if (calculationHistory.length > 5) {
+                        calculationHistory.pop();
+                    }
+                    
+                    updateHistory();
+                } else {
+                    result.textContent = 'Error';
+                }
+            } catch (error) {
+                result.textContent = 'Error';
+            }
+        }
+
+        function updateHistory() {
+            if (calculationHistory.length === 0) {
+                historyList.innerHTML = '<div class="history-item">No calculations yet</div>';
+            } else {
+                historyList.innerHTML = calculationHistory
+                    .map(item => `<div class="history-item">${item}</div>`)
+                    .join('');
+            }
+        }
+
+        // Allow keyboard input
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                appendNumber(key);
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                appendOperator(key);
+            } else if (key === '.') {
+                appendDecimal(key);
+            } else if (key === 'Enter') {
+                calculate();
+            } else if (key === 'Escape') {
+                clearDisplay();
+            } else if (key === 'Backspace') {
+                deleteLast();
+            }
+        });
+    </script>
+</body>
+</html>

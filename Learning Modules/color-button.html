@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changing Button</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        .color-button {
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-button:active {
+            transform: translateY(0);
+        }
+
+        .color-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .color-info p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .color-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .click-counter {
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Magic Color Button</h1>
+        <p class="subtitle">Click the button to change its color!</p>
+        
+        <button class="color-button" id="colorBtn" onclick="changeColor()">
+            Click Me!
+        </button>
+        
+        <div class="color-info">
+            <p>Watch the button transform with each click! I've implemented this using JavaScript to randomly generate colors.</p>
+            <p class="color-name" id="colorName">Current Color: #ff6b6b</p>
+        </div>
+        
+        <p class="click-counter" id="counter">Clicks: 0</p>
+
+        <div class="footer">
+            <p>Created by <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Tejas Kamble</a> | B Tech Engineering </p>
+            <p>Email: tejasksocials@gmail.com</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+            </div>
+            <p style="margin-top: 10px;">&copy; Tejas Kamble - All rights reserved</p>
+        </div>
+    </div>
+
+    <script>
+        // Array of beautiful colors
+        const colors = [
+            '#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', 
+            '#54a0ff', '#5f27cd', '#01a3a4', '#f368e0',
+            '#00d2d3', '#ff9f43', '#10ac84', '#ee5a24',
+            '#9b59b6', '#3498db', '#e74c3c', '#2ecc71'
+        ];
+
+        let clickCount = 0;
+
+        function changeColor() {
+            const button = document.getElementById('colorBtn');
+            const colorName = document.getElementById('colorName');
+            const counter = document.getElementById('counter');
+            
+            // Get random color from array
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            const newColor = colors[randomIndex];
+            
+            // Apply new color to button
+            button.style.backgroundColor = newColor;
+            button.style.color = getContrastColor(newColor);
+            
+            // Update color name display
+            colorName.textContent = 'Current Color: ' + newColor;
+            
+            // Increment and display counter
+            clickCount++;
+            counter.textContent = 'Clicks: ' + clickCount;
+            
+            // Add a fun animation
+            button.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        // Function to determine text color based on background
+        function getContrastColor(hexColor) {
+            const r = parseInt(hexColor.substr(1, 2), 16);
+            const g = parseInt(hexColor.substr(3, 2), 16);
+            const b = parseInt(hexColor.substr(5, 2), 16);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            return brightness > 128 ? '#333333' : '#ffffff';
+        }
+    </script>
+</body>
+</html>

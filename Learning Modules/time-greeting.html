@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Based Greeting | Tejas Kamble</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .container {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            text-align: center;
+            max-width: 550px;
+            width: 100%;
+        }
+
+        .clock-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .time-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .current-time {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .time-period {
+            font-size: 1.2rem;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .greeting-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+        }
+
+        .greeting-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .greeting-message {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .show-greeting-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .show-greeting-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .creator {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .creator a {
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #1e3c72;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="clock-icon">🕐</div>
+        <h1>Time-Based Greeting</h1>
+        <p class="subtitle">A simple JavaScript project that greets you based on the time of day</p>
+        
+        <div class="time-display">
+            <div class="current-time" id="clock">--:--:--</div>
+            <div class="time-period" id="period">Loading...</div>
+        </div>
+        
+        <div class="greeting-box">
+            <h3>Your Greeting:</h3>
+            <p class="greeting-message" id="greeting">Click the button to see your personalized greeting!</p>
+        </div>
+        
+        <button class="show-greeting-btn" onclick="showGreeting()">
+            Get Greeting
+        </button>
+        
+        <p class="creator">
+            Created by <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Tejas Kamble</a> | B Tech Engineering 
+        </p>
+        <p class="creator">Email: tejasksocials@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+        </div>
+        <p class="creator" style="margin-top: 10px;">&copy; Tejas Kamble - All rights reserved</p>
+    </div>
+
+    <script>
+        // Function to update the clock in real-time
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            
+            // Add leading zeros
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            // Display time
+            document.getElementById('clock').textContent = hours + ':' + minutes + ':' + seconds;
+            
+            // Determine time period
+            let period = '';
+            if (hours < 12) {
+                period = 'Good Morning! 🌅';
+            } else if (hours < 17) {
+                period = 'Good Afternoon! ☀️';
+            } else {
+                period = 'Good Evening! 🌙';
+            }
+            
+            document.getElementById('period').textContent = period;
+        }
+
+        // Function to show greeting message
+        function showGreeting() {
+            const now = new Date();
+            let hours = now.getHours();
+            let greeting = '';
+            
+            if (hours < 12) {
+                greeting = '☀️ Good Morning! Welcome to my project! I hope you have a fantastic day ahead. Remember, every day is a new opportunity to learn something new!';
+            } else if (hours < 17) {
+                greeting = '🌤️ Good Afternoon! Thanks for checking out my work! Keep up the great momentum and make the most of your day!';
+            } else {
+                greeting = '🌙 Good Evening! I hope you had a productive day! Take some time to relax and enjoy your evening.';
+            }
+            
+            // Add personal touch
+            greeting += '\n\nBest regards,\nTejas Kamble\nB Tech Engineering ';
+            
+            // Display greeting
+            document.getElementById('greeting').textContent = greeting;
+            
+            // Show alert
+            let alertGreeting = '';
+            if (hours < 12) {
+                alertGreeting = 'Good Morning!';
+            } else if (hours < 17) {
+                alertGreeting = 'Good Afternoon!';
+            } else {
+                alertGreeting = 'Good Evening!';
+            }
+            
+            alert(alertGreeting + '\n\n' + greeting);
+        }
+
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        
+        // Initial clock update
+        updateClock();
+    </script>
+</body>
+</html>

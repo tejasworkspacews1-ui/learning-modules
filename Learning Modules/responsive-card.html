@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Card Component</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .custom-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 100%;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .custom-card:hover .card-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .card-img-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-category {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #667eea;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            background: transparent;
+            border-top: 1px solid #eee;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #667eea;
+        }
+
+        .author-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .author-role {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .read-more-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .card-icon {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .creator-info {
+            text-align: center;
+            margin-top: 50px;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .creator-info a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-layer-group"></i> Responsive Card Component</h1>
+            <p>Built with Bootstrap 5</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="custom-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop" alt="Web Development">
+                        <span class="card-img-overlay"><i class="fas fa-code"></i> Development</span>
+                        <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-category">Web Development</div>
+                        <h3 class="card-title">Building Modern Websites with HTML & CSS</h3>
+                        <p class="card-text">Learn the fundamentals of web development including HTML5, CSS3, and responsive design principles to create beautiful, functional websites.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="author-info">
+                            <img src="tejas.jpg" alt="Author" class="author-avatar">
+                            <div>
+                                <div class="author-name">Tejas Kamble</div>
+                                <div class="author-role">B Tech</div>
+                            </div>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="custom-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop" alt="JavaScript">
+                        <span class="card-img-overlay"><i class="fab fa-js"></i> JavaScript</span>
+                        <div class="card-icon"><i class="fab fa-js"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-category">JavaScript</div>
+                        <h3 class="card-title">Mastering JavaScript Programming</h3>
+                        <p class="card-text">Dive deep into JavaScript programming language. From basic syntax to advanced concepts like DOM manipulation and event handling.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="author-info">
+                            <img src="tejas.jpg" alt="Author" class="author-avatar">
+                            <div>
+                                <div class="author-name">Tejas Kamble</div>
+                                <div class="author-role">B Tech</div>
+                            </div>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="custom-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="Coding">
+                        <span class="card-img-overlay"><i class="fas fa-python"></i> Python</span>
+                        <div class="card-icon"><i class="fas fa-terminal"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-category">Python</div>
+                        <h3 class="card-title">Introduction to Python Programming</h3>
+                        <p class="card-text">Start your programming journey with Python. Perfect for beginners, this course covers variables, loops, functions, and basic data structures.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="author-info">
+                            <img src="tejas.jpg" alt="Author" class="author-avatar">
+                            <div>
+                                <div class="author-name">Tejas Kamble</div>
+                                <div class="author-role">B Tech <i class="fas fa-chalkboard-teacher"></i></div>
+                            </div>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="creator-info">
+            <p>Created by <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Tejas Kamble</a> | B Tech Engineering</p>
+            <p>Email: tejasksocials@gmail.com</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+            </div>
+            <p style="margin-top: 15px;">&copy; Tejas Kamble - All rights reserved</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage - Media Queries</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background: #16213e;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* About Section */
+        .about {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Cards Grid */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 40px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Features Section */
+        .features {
+            background: #f8f9fa;
+            padding: 50px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .feature h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #16213e;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #38ef7d;
+            text-decoration: none;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            color: #38ef7d;
+        }
+
+        /* MEDIA QUERIES */
+
+        /* Tablet (max-width: 992px) */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile Landscape (max-width: 768px) */
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 15px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .about {
+                flex-direction: column;
+                padding: 25px;
+            }
+
+            .about-image, .about-content {
+                min-width: 100%;
+            }
+
+            .about-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                padding: 30px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact {
+                padding: 30px 20px;
+            }
+
+            .contact h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Mobile Portrait (max-width: 480px) */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.7rem;
+            }
+
+            nav {
+                padding: 10px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .about-content, .card, .feature, .contact {
+                padding: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .contact-button {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Large Desktop (min-width: 1400px) */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+
+            header {
+                padding: 80px 40px;
+            }
+
+            header h1 {
+                font-size: 3.5rem;
+            }
+
+            .cards-grid {
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-globe"></i> Responsive Webpage</h1>
+        <p>Built with CSS Media Queries</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop" alt="Student working on laptop">
+            </div>
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>Hi, I'm <strong>Tejas Kamble</strong>, a B Tech Engineering First Year student passionate about web development and technology. I'm currently learning HTML, CSS, JavaScript, and exploring various web frameworks.</p>
+                <p>This responsive webpage demonstrates my understanding of CSS media queries and responsive design principles.</p>
+                <p>My goal is to become a full-stack developer and contribute to innovative projects that make a difference.</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <h2 class="section-title" id="skills">My Skills</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fab fa-html5"></i>
+                </div>
+                <h3>HTML5</h3>
+                <p>Semantic HTML, forms, accessibility, and best practices for building structured webpages.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fab fa-css3-alt"></i>
+                </div>
+                <h3>CSS3</h3>
+                <p>Modern CSS, Flexbox, Grid, animations, and responsive design techniques.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fab fa-js"></i>
+                </div>
+                <h3>JavaScript</h3>
+                <p>DOM manipulation, events, functions, and basic programming concepts.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fab fa-bootstrap"></i>
+                </div>
+                <h3>Bootstrap</h3>
+                <p>Responsive grid systems, pre-built components, and utility classes.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <h3>GitHub</h3>
+                <p>Version control, repositories, and collaboration using Git.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Problem Solving</h3>
+                <p>Analytical thinking, debugging, and breaking down complex problems.</p>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2 class="section-title">What I Offer</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Mobile-First</h4>
+                    <p>Designs that work perfectly on all screen sizes</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Fast Performance</h4>
+                    <p>Optimized code for quick loading times</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h4>Visual Appeal</h4>
+                    <p>Beautiful and modern user interfaces</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <h4>SEO Friendly</h4>
+                    <p>Search engine optimized structure</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h2>Let's Connect!</h2>
+            <p>I'm always excited to learn new things and collaborate on projects. Feel free to reach out!</p>
+            <a href="mailto:tejasksocials@gmail.com" class="contact-button">Get In Touch</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>Created by <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Tejas Kamble</a> | B Tech Engineering</p>
+        <p>Email: tejasksocials@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+        </div>
+        <p style="margin-top: 15px;">&copy; Tejas Kamble - All rights reserved</p>
+    </footer>
+</body>
+</html>

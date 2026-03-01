@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tejas Kamble | Virtual Identity Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Identity Card Specific Styles */
+        .id-card-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .id-card-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(233, 69, 96, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(67, 97, 238, 0.15) 0%, transparent 50%);
+        }
+
+        .id-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f0f0f5 100%);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .id-card-header {
+            background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
+            padding: 35px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .id-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .id-card-header h1 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .id-card-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .id-card-body {
+            padding: 30px;
+        }
+
+        .id-field {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .id-field:last-child {
+            border-bottom: none;
+        }
+
+        .id-field:hover {
+            padding-left: 10px;
+        }
+
+        .id-field:hover .id-icon {
+            background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
+            color: white;
+        }
+
+        .id-icon {
+            width: 45px;
+            height: 45px;
+            background: #f0f0f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 18px;
+            color: #0f3460;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .id-field-content {
+            flex: 1;
+        }
+
+        .id-field-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .id-field-value {
+            font-size: 1rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .id-card-footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .quick-link {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f3460;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-link:hover {
+            background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .card-badge {
+            background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation for desktop */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-logo {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e94560;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            color: #e94560;
+        }
+
+        .footer-info {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                justify-content: center;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <a href="index.html" class="nav-logo">TK</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="landing-page.html">About</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://tejas-personal-portfolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+        </div>
+    </nav>
+
+    <!-- Identity Card -->
+    <div class="id-card-container">
+        <div class="id-card">
+            <div class="id-card-header">
+                <div class="profile-image">TK</div>
+                <h1>Tejas Kamble</h1>
+                <p>B Tech Engineering Student</p>
+            </div>
+            <div class="id-card-body">
+                <div class="id-field">
+                    <div class="id-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="id-field-content">
+                        <div class="id-field-label">University</div>
+                        <div class="id-field-value">Shah and Anchor Kutchhi Engineering College</div>
+                    </div>
+                </div>
+                <div class="id-field">
+                    <div class="id-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="id-field-content">
+                        <div class="id-field-label">Email</div>
+                        <div class="id-field-value">tejasksocials@gmail.com</div>
+                    </div>
+                </div>
+                <div class="id-field">
+                    <div class="id-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="id-field-content">
+                        <div class="id-field-label">Contact</div>
+                        <div class="id-field-value">+91 8928545352</div>
+                    </div>
+                </div>
+            </div>
+            <div class="id-card-footer">
+                <div class="quick-links">
+                    <a href="https://www.linkedin.com/in/tejas-kamble-5342443b1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="quick-link" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/tejasworkspace_u1?igsh=MXRzcG55N3psbWxzbw==" target="_blank" rel="noopener noreferrer" class="quick-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/tejasworkspacews1-ui" target="_blank" rel="noopener noreferrer" class="quick-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <span class="card-badge">Virtual ID</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-info">
+        <p>&copy; Tejas Kamble - All rights reserved</p>
+    </div>
+
+    <script>
+        // Add subtle animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('.id-card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
